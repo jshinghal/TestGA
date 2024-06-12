@@ -1,0 +1,93 @@
+---
+openapi: "3.0.1"
+info:
+  title: "Case"
+  version: "v1"
+servers:
+- url: "{server}/gna/api/GNAAPI/v1"
+  description: "Default Application"
+  variables:
+    server:
+      default: "http://rc-lx10052.ut.dentegra.lab:8080"
+tags:
+- name: "GNA-API-CaseManagement"
+paths:
+  /case:
+    get:
+      tags:
+      - "GNA-API-CaseManagement"
+      summary: "Get Case Details"
+      description: "Get the case details."
+      parameters:
+      - name: "systemid"
+        in: "header"
+        description: "ID of the requesting system"
+        allowEmptyValue: true
+        schema:
+          type: "string"
+      - name: "tin"
+        in: "header"
+        description: "Provider TIN"
+        allowEmptyValue: true
+        schema:
+          type: "string"
+      - name: "CaseID"
+        in: "query"
+        description: "CaseID"
+        allowEmptyValue: true
+        schema:
+          type: "string"
+      responses:
+        default:
+          description: "Response"
+          headers:
+            correlationid:
+              description: "ID of the request"
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                type: "string"
+    post:
+      tags:
+      - "GNA-API-CaseManagement"
+      summary: "Create Dispute Case"
+      description: "Creates a case using the Pega API"
+      parameters:
+      - name: "systemid"
+        in: "header"
+        description: "ID of the requesting system"
+        allowEmptyValue: true
+        schema:
+          type: "string"
+      - name: "tin"
+        in: "header"
+        description: "Provider TIN"
+        allowEmptyValue: true
+        schema:
+          type: "string"
+      requestBody:
+        description: "Request"
+        content:
+          text/plain:
+            schema:
+              type: "string"
+      responses:
+        default:
+          description: ""
+          headers:
+            correlationid:
+              description: "ID of the request"
+              schema:
+                type: "string"
+components:
+  schemas:
+    RULE-OBJ-CLASS.GNA-API-CASEMANAGEMENT-RESPONSE.false.PEGA_INTERNAL:
+      title: "GNA-API-CaseManagement-Response"
+      type: "object"
+      properties:
+        ID:
+          title: "ID"
+          type: "string"
+      description: "To hold the response parameters"
